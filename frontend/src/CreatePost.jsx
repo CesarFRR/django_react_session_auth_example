@@ -19,19 +19,30 @@ const Posts = () => {
             body,
             date: new Date().toISOString(),
         };
-        fetch(BASE_URL+'/accounts/api/posts/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newPost),
+    
+        // Primero, obtenemos el token CSRF
+        fetch(BASE_URL + "/accounts/api/csrf/", {
+            credentials: 'include'
         })
+        .then(response => response.headers.get('X-CSRFToken'))
+        .then(csrfToken => {
+            // Luego, hacemos la petición POST con el token CSRF
+            fetch(BASE_URL + '/accounts/api/posts/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(newPost),
+                credentials: 'include'
+            })
             .then(response => response.json())
             .then(data => {
                 setPosts([...posts, data]);
                 setTitle('');
                 setBody('');
             });
+        });
     };
 
   
