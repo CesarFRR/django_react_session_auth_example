@@ -7,10 +7,30 @@ const Posts = () => {
     const [body, setBody] = useState('');
 
     useEffect(() => {
-        fetch(BASE_URL+'/accounts/api/posts/')
+        fetch(BASE_URL + "/accounts/api/csrf/", {
+            credentials: 'include'
+        })
+        .then(response => response.headers.get('X-CSRFToken'))
+        .then(csrfToken => {
+        fetch(BASE_URL+'/accounts/api/posts/',{
+            
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            credentials: 'include'
+
+        })
             .then(response => response.json())
             .then(data => setPosts(data));
-    }, []);
+
+
+    })
+    }
+    
+    
+    , []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,7 +71,7 @@ const Posts = () => {
     return (
         <div>
             <div>
-                {posts.map((post, index) => (
+                {posts && posts[0] && posts[0].title && posts.map((post, index) => (
                     <div key={index}>
                         <h3>{post.title}</h3>
                         <p>{post.body}</p>
