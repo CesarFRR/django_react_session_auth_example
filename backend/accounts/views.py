@@ -13,7 +13,11 @@ from rest_framework import status
 from .models import Post
 from .serializers import PostSerializer
 
+from rest_framework.authentication import SessionAuthentication
+from rest_framework import generics, permissions, status
+
 class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]
     def post(self, request):
         data = request.data
         username = data.get('username')
@@ -66,6 +70,8 @@ class get_csrf(APIView):
 
 
 class PostListCreateView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
         # Access the "request" parameter to fix the Pylance problem
         _ = request
