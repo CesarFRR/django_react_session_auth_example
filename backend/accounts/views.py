@@ -17,7 +17,8 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework import generics, permissions, status
 
 class LoginView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
     def post(self, request):
         data = request.data
         username = data.get('username')
@@ -36,6 +37,8 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
     def get(self, request):
         if not request.user.is_authenticated:
             return Response({'detail': 'You\'re not logged in.'}, status=400)
