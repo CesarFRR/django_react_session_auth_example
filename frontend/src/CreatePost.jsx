@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-const BASE_URL = "http://localhost:8000/api"
+const BASE_URL =  "https://api-django-react-cookies-j252.onrender.com/api"
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);

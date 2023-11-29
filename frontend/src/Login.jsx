@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {login, logout } from "./api/accounts.api";
 import { UNPetAxios } from "./api/config";
-const BASE_URL = "http://localhost:8000/api"
+const BASE_URL = "https://api-django-react-cookies-j252.onrender.com/api"
 import { BrowserRouter, Route } from "react-router-dom";
 import Posts from "./CreatePost"
 const Login = () => {
