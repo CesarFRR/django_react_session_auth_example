@@ -2,8 +2,14 @@
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q@3_gund87n2h1s%gt((bs9*xue+9utxjtpj1*f-&aba0w6z!g'
+
+CSRF_TRUSTED_ORIGINS = ["https://api-django-react-cookies.onrender.com"]
+
 DEBUG = True
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["https://api-django-react-cookies.onrender.com"]
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -94,8 +100,8 @@ SESSION_COOKIE_HTTPONLY = True
 CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
 
 # PROD ONLY
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
