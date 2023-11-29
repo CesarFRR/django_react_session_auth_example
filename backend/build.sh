@@ -13,7 +13,7 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Recolecta los archivos estáticos (si es necesario)
-python manage.py collectstatic --no-input
+#python manage.py collectstatic --no-input
 
 # Inicia la aplicación, Render se encargará de Gunicorn
 # No es necesario iniciar Gunicorn manualmente
