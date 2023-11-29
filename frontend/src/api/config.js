@@ -2,9 +2,10 @@ import axios from "axios";
 
 //===============================================//
 // --> SOLO UNA PUEDE SER TRUE <-- //
-export const DEBUG = true;
+export const DEBUG = false;
 export const DOCKER_MODE = false;
 export const RENDER_MODE = false;
+export const PRODUCTION_TEXT = true;
 //===============================================//
 
 let URL = "";
@@ -15,7 +16,12 @@ if (DEBUG) {
         URL = "";
 } else if (RENDER_MODE) {
         URL = "https://unpet-api-rest.onrender.com/api";
-} else {
+} 
+else if (PRODUCTION_TEXT) {
+        URL = "https://api-django-react-cookies-j252.onrender.com";
+}
+
+else {
         // Test each URL with a simple GET request to "accounts/api/test/"
         const urls = [
                 "http://127.0.0.1:8000/api",

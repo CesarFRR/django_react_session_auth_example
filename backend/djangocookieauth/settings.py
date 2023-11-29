@@ -3,12 +3,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q@3_gund87n2h1s%gt((bs9*xue+9utxjtpj1*f-&aba0w6z!g'
 
-CSRF_TRUSTED_ORIGINS = ["https://api-django-react-cookies.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://api-django-react-cookies.onrender.com", "https://api-django-react-cookies-j252.onrender.com"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://api-django-react-cookies.onrender.com"]
-
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -97,7 +96,7 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', "https://api-django-react-cookies.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', "https://api-django-react-cookies.onrender.com", "https://api-django-react-cookies-j252.onrender.com"]
 
 # PROD ONLY
 CSRF_COOKIE_SECURE = True
@@ -107,6 +106,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     "https://api-django-react-cookies.onrender.com",
+    "https://api-django-react-cookies-j252.onrender.com",
 ]
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 CORS_ALLOW_CREDENTIALS = True
