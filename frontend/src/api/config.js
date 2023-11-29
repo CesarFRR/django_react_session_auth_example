@@ -18,7 +18,7 @@ if (DEBUG) {
         URL = "https://unpet-api-rest.onrender.com/api";
 } 
 else if (PRODUCTION_TEXT) {
-        URL = "https://api-django-react-cookies-j252.onrender.com";
+        URL = "https://api-django-react-cookies-j252.onrender.com/api";
 }
 
 else {
