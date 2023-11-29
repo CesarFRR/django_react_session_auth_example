@@ -104,21 +104,23 @@ export class UNPetAxios {
         
         console.log('inicializando axios, csrfToken y csrfToken2: ', csrfToken, this.csrfToken2);
     }
-    async fetchWithHeaders(url, options = {}) {
-        if (this.csrfToken2 === null && csrfToken === null) {
-            this.csrfToken2 = await getCSRF();
-        }
-        console.log('UNPETAXIOS, csrfToken y csrfToken2: ', csrfToken, this.csrfToken2);
+    async fetchWithHeaders(url, options = {}, moreHeaders = {}) {
+        let contenttype = moreHeaders ? moreHeaders["Content-Type"] : "application/json";
     
-        axios.defaults.headers.common['X-CSRFToken'] = this.csrfToken2 || csrfToken;
+        // Primero, obtenemos el token CSRF
+        const csrfResponse = await axios.get(this.BASE_URL_RUTA + "/accounts/api/csrf/", { withCredentials: true });
+        const csrfToken = csrfResponse.headers['x-csrftoken'];
+    
         const allOptions = {
-                headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": axios.defaults.headers.common['X-CSRFToken'],
-                },
-                withCredentials: true, // axios usa withCredentials en lugar de credentials
-                ...options,
+            headers: {
+                "Content-Type": contenttype,
+                "X-CSRFToken": csrfToken, // Aquí ponemos el token CSRF
+                ...moreHeaders
+            },
+            withCredentials: true, // axios usa withCredentials en lugar de credentials
+            ...options,
         };
+    
         console.log('JUSTO ANTES DEL FETCH: fetchWithHeaders, allOptions: ', allOptions, 'URL: ', this.BASE_URL_RUTA + url);
         return axios(this.BASE_URL_RUTA + url, allOptions); // reemplaza fetch con axios
     }
