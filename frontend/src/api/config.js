@@ -108,7 +108,7 @@ export class UNPetAxios {
         let contenttype = moreHeaders ? moreHeaders["Content-Type"] : "application/json";
     
         // Primero, obtenemos el token CSRF
-        const csrfResponse = await axios.get(this.BASE_URL_RUTA + "/accounts/api/csrf/", { withCredentials: true });
+        const csrfResponse = await axios.get(BASE_URL + "/accounts/api/csrf/", { withCredentials: true });
         const csrfToken = csrfResponse.headers['x-csrftoken'];
     
         const allOptions = {
