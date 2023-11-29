@@ -14,7 +14,7 @@ const Posts = () => {
         .then(csrfToken => {
         fetch(BASE_URL+'/accounts/api/posts/',{
             
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
