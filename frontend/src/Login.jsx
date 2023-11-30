@@ -11,7 +11,29 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  
+  useEffect(() => {
+    fetch(BASE_URL + "/accounts/api/session/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isAuthenticated){
+          setIsAuthenticated(true);
+
+        }else
+        {
+          setIsAuthenticated(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      }); 
+  }, []);
+
+
   const whoami = () => {
     fetch(BASE_URL + "/accounts/api/whoami/", {
       headers: {

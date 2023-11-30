@@ -1,15 +1,8 @@
-import json
-
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from .models import Post
 from .serializers import PostSerializer
 
@@ -49,9 +42,9 @@ class LogoutView(APIView):
 class SessionView(APIView):
     def get(self, request):
         if not request.user.is_authenticated:
-            return Response({'isAuthenticated': False})
+            return Response({'isAuthenticated': False, 'username': None})
 
-        return Response({'isAuthenticated': True})
+        return Response({'isAuthenticated': True, 'username': request.user.username})
 
 class WhoAmIView(APIView):
     def get(self, request):
